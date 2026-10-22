@@ -4,6 +4,14 @@
 
 GarudaShield adalah proyek pemantauan keamanan jaringan berbasis web yang mengintegrasikan MikroTik, Wazuh, dan FastAPI untuk membantu menampilkan serta menganalisis peringatan keamanan dari lingkungan jaringan.
 
+## Dashboard Preview
+
+![GarudaShield Dashboard](docs/dashboard.png)
+
+GarudaShield menampilkan pemantauan keamanan jaringan melalui
+integrasi Wazuh, backend FastAPI, dan dashboard web.
+
+
 ## Fitur
 
 - Dashboard ringkasan peringatan keamanan.
