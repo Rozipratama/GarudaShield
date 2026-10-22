@@ -6,7 +6,7 @@ GarudaShield adalah proyek pemantauan keamanan jaringan berbasis web yang mengin
 
 ## Dashboard Preview
 
-![GarudaShield Dashboard](docs/Peringatan.png)
+![GarudaShield Dashboard](docs/Ringkasan.png)
 
 GarudaShield menampilkan pemantauan keamanan jaringan melalui
 integrasi Wazuh, backend FastAPI, dan dashboard web.
