@@ -1,0 +1,222 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#e4ecf7">
+  <meta name="description" content="GarudaShield - Dashboard pemantauan keamanan jaringan IT/OT.">
+  <title>GarudaShield | Pemantauan Keamanan Jaringan</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-badge">
+        <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+          <path d="M20 3 35 9v11c0 8-6.5 14.5-15 17C11.5 34.5 5 28 5 20V9z"/>
+          <path d="M20 30V14M20 18l-8-5M20 18l8-5M20 23l-6-3.5M20 23l6-3.5"/>
+        </svg>
+      </span>
+      <div>
+        <h2>GarudaShield</h2>
+        <small>Pertahanan jaringan</small>
+      </div>
+    </div>
+
+    <p class="nav-label">Pemantauan</p>
+    <nav aria-label="Navigasi utama">
+      <a class="nav-link active" href="#ringkasan" aria-current="page">Ringkasan</a>
+      <a class="nav-link" href="#peringatan">Peringatan</a>
+      <a class="nav-link" href="#infrastruktur">Infrastruktur</a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="lab-badge">
+        <span class="dot"></span>
+        Lingkungan lab
+      </div>
+      <small>GarudaShield v0.1.0</small>
+    </div>
+  </aside>
+
+  <main class="main-content" id="ringkasan">
+    <header class="topbar">
+      <div>
+        <h1>Ringkasan keamanan</h1>
+        <p class="subtitle">Pantau keamanan jaringan IT/OT dari satu layar.</p>
+      </div>
+
+      <div class="topbar-actions">
+        <span class="mode-badge" id="data-mode" data-live="false">
+          Data simulasi
+        </span>
+        <span class="updated" id="updated-at">Belum diperbarui</span>
+        <button class="btn" id="auto-toggle" type="button" aria-pressed="true">
+          Otomatis: nyala
+        </button>
+        <button class="btn" id="refresh-button" type="button">
+          Perbarui sekarang
+        </button>
+      </div>
+    </header>
+
+    <section
+      class="status-banner"
+      id="status-banner"
+      data-state="unknown"
+      aria-live="polite"
+    >
+      <span class="lamp" aria-hidden="true"></span>
+
+      <div>
+        <h2 id="status-headline">Memuat data</h2>
+        <p id="status-detail">Menghubungi server GarudaShield.</p>
+        <p class="muted" id="status-counts"></p>
+      </div>
+
+      <button class="btn" id="status-action" type="button" hidden>
+        Lihat detail
+      </button>
+    </section>
+
+    <!-- Statistik peringkat severity dari API GarudaShield -->
+    <section
+      class="severity-cards"
+      aria-label="Statistik peringatan berdasarkan tingkat keparahan"
+    >
+      <article class="sev-card" data-level="critical">
+        <h3>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/>
+            <path d="M12 8v4M12 15.5h.01"/>
+          </svg>
+          Kritis
+        </h3>
+        <p class="sev-count" id="count-critical">-</p>
+        <p class="sev-note">Peringatan kritis</p>
+      </article>
+
+      <article class="sev-card" data-level="high">
+        <h3>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 4l9 16H3z"/>
+            <path d="M12 10v4M12 17h.01"/>
+          </svg>
+          Tinggi
+        </h3>
+        <p class="sev-count" id="count-high">-</p>
+        <p class="sev-note">Peringatan tinggi</p>
+      </article>
+
+      <article class="sev-card" data-level="medium">
+        <h3>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M12 7.5v5M12 16h.01"/>
+          </svg>
+          Sedang
+        </h3>
+        <p class="sev-count" id="count-medium">-</p>
+        <p class="sev-note">Peringatan sedang</p>
+      </article>
+
+      <article class="sev-card" data-level="low">
+        <h3>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/>
+            <path d="M9 12l2 2 4-4"/>
+          </svg>
+          Rendah
+        </h3>
+        <p class="sev-count" id="count-low">-</p>
+        <p class="sev-note">Peringatan rendah</p>
+      </article>
+    </section>
+
+    <section class="panel" id="peringatan">
+      <div class="panel-header">
+        <h2>Peringatan terbaru</h2>
+        <p>Klik satu baris untuk melihat penjelasan dan langkah awal.</p>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Waktu</th>
+              <th scope="col">Segmen</th>
+              <th scope="col">Sumber</th>
+              <th scope="col">Kejadian</th>
+              <th scope="col">Tingkat</th>
+            </tr>
+          </thead>
+          <tbody id="alerts-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel" id="infrastruktur">
+      <div class="panel-header">
+        <h2>Infrastruktur lab</h2>
+        <p>Status perangkat dicatat manual, belum dipantau otomatis.</p>
+      </div>
+
+      <div class="device-row">
+        <div class="device-icon" aria-hidden="true">R</div>
+        <div class="device-info">
+          <strong>MikroTik CHR</strong>
+          <span><code>192.168.56.20</code>, sumber syslog</span>
+        </div>
+        <span class="muted">Konektivitas sudah diuji</span>
+      </div>
+
+      <div class="device-row">
+        <div class="device-icon" aria-hidden="true">S</div>
+        <div class="device-info">
+          <strong>Wazuh Server</strong>
+          <span><code>192.168.56.10</code>, Ubuntu Server</span>
+        </div>
+        <span class="muted">Status perlu verifikasi langsung</span>
+      </div>
+    </section>
+
+    <footer>
+      GarudaShield — Deteksi dini ancaman jaringan IT/OT
+    </footer>
+  </main>
+
+  <div class="overlay" id="detail-overlay"></div>
+
+  <div
+    class="drawer"
+    id="detail"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="detail-title"
+    inert
+  >
+    <button class="btn drawer-close" id="detail-close" type="button">
+      Tutup
+    </button>
+
+    <div id="detail-badges" class="badges"></div>
+    <h2 id="detail-title"></h2>
+    <dl id="detail-facts" class="facts"></dl>
+
+    <section id="detail-explanation" hidden>
+      <h3>Penjelasan</h3>
+      <p id="detail-text"></p>
+    </section>
+
+    <section>
+      <h3>Langkah awal yang disarankan</h3>
+      <ol id="detail-steps"></ol>
+      <p class="muted" id="detail-note"></p>
+    </section>
+  </div>
+</body>
+</html>
+```

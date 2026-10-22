@@ -1,0 +1,25 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+*.pyd
+.venv/
+venv/
+env/
+
+# Environment dan rahasia
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# Editor dan OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Log dan hasil pengujian
+*.log
+.pytest_cache/
