@@ -1,13 +1,13 @@
 ```html
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light">
   <meta name="theme-color" content="#e4ecf7">
-  <meta name="description" content="GarudaShield - Dashboard pemantauan keamanan jaringan IT/OT.">
-  <title>GarudaShield | Pemantauan Keamanan Jaringan</title>
+  <meta name="description" content="GarudaShield - IT/OT network security monitoring dashboard.">
+  <title>GarudaShield | Network Security Monitoring</title>
   <link rel="stylesheet" href="css/style.css">
   <script src="js/app.js" defer></script>
 </head>
@@ -22,21 +22,21 @@
       </span>
       <div>
         <h2>GarudaShield</h2>
-        <small>Pertahanan jaringan</small>
+        <small>Network Defense</small>
       </div>
     </div>
 
-    <p class="nav-label">Pemantauan</p>
+    <p class="nav-label">Monitoring</p>
     <nav aria-label="Navigasi utama">
-      <a class="nav-link active" href="#ringkasan" aria-current="page">Ringkasan</a>
-      <a class="nav-link" href="#peringatan">Peringatan</a>
-      <a class="nav-link" href="#infrastruktur">Infrastruktur</a>
+      <a class="nav-link active" href="#ringkasan" aria-current="page">Overview</a>
+      <a class="nav-link" href="#peringatan">Alerts</a>
+      <a class="nav-link" href="#infrastruktur">Infrastructure</a>
     </nav>
 
     <div class="sidebar-bottom">
       <div class="lab-badge">
         <span class="dot"></span>
-        Lingkungan lab
+        Lab Environment
       </div>
       <small>GarudaShield v0.1.0</small>
     </div>
@@ -45,20 +45,20 @@
   <main class="main-content" id="ringkasan">
     <header class="topbar">
       <div>
-        <h1>Ringkasan keamanan</h1>
-        <p class="subtitle">Pantau keamanan jaringan IT/OT dari satu layar.</p>
+        <h1>Security Overview</h1>
+        <p class="subtitle">Monitor IT/OT network security from a single dashboard.</p>
       </div>
 
       <div class="topbar-actions">
         <span class="mode-badge" id="data-mode" data-live="false">
-          Data simulasi
+          Simulated Data
         </span>
-        <span class="updated" id="updated-at">Belum diperbarui</span>
+        <span class="updated" id="updated-at">Not yet updated</span>
         <button class="btn" id="auto-toggle" type="button" aria-pressed="true">
-          Otomatis: nyala
+          Auto-refresh: On
         </button>
         <button class="btn" id="refresh-button" type="button">
-          Perbarui sekarang
+          Refresh Now
         </button>
       </div>
     </header>
@@ -72,20 +72,20 @@
       <span class="lamp" aria-hidden="true"></span>
 
       <div>
-        <h2 id="status-headline">Memuat data</h2>
-        <p id="status-detail">Menghubungi server GarudaShield.</p>
+        <h2 id="status-headline">Loading data</h2>
+        <p id="status-detail">Connecting to the GarudaShield server.</p>
         <p class="muted" id="status-counts"></p>
       </div>
 
       <button class="btn" id="status-action" type="button" hidden>
-        Lihat detail
+        View Details
       </button>
     </section>
 
     <!-- Statistik peringkat severity dari API GarudaShield -->
     <section
       class="severity-cards"
-      aria-label="Statistik peringatan berdasarkan tingkat keparahan"
+      aria-label="Alert statistics by severity"
     >
       <article class="sev-card" data-level="critical">
         <h3>
@@ -93,10 +93,10 @@
             <path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/>
             <path d="M12 8v4M12 15.5h.01"/>
           </svg>
-          Kritis
+          Critical
         </h3>
         <p class="sev-count" id="count-critical">-</p>
-        <p class="sev-note">Peringatan kritis</p>
+        <p class="sev-note">Critical alerts</p>
       </article>
 
       <article class="sev-card" data-level="high">
@@ -105,10 +105,10 @@
             <path d="M12 4l9 16H3z"/>
             <path d="M12 10v4M12 17h.01"/>
           </svg>
-          Tinggi
+          High
         </h3>
         <p class="sev-count" id="count-high">-</p>
-        <p class="sev-note">Peringatan tinggi</p>
+        <p class="sev-note">High-severity alerts</p>
       </article>
 
       <article class="sev-card" data-level="medium">
@@ -117,10 +117,10 @@
             <circle cx="12" cy="12" r="9"/>
             <path d="M12 7.5v5M12 16h.01"/>
           </svg>
-          Sedang
+          Medium
         </h3>
         <p class="sev-count" id="count-medium">-</p>
-        <p class="sev-note">Peringatan sedang</p>
+        <p class="sev-note">Medium-severity alerts</p>
       </article>
 
       <article class="sev-card" data-level="low">
@@ -129,28 +129,28 @@
             <path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/>
             <path d="M9 12l2 2 4-4"/>
           </svg>
-          Rendah
+          Low
         </h3>
         <p class="sev-count" id="count-low">-</p>
-        <p class="sev-note">Peringatan rendah</p>
+        <p class="sev-note">Low-severity alerts</p>
       </article>
     </section>
 
     <section class="panel" id="peringatan">
       <div class="panel-header">
-        <h2>Peringatan terbaru</h2>
-        <p>Klik satu baris untuk melihat penjelasan dan langkah awal.</p>
+        <h2>Recent Alerts</h2>
+        <p>Select a row to view the explanation and recommended initial actions.</p>
       </div>
 
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
-              <th scope="col">Waktu</th>
-              <th scope="col">Segmen</th>
-              <th scope="col">Sumber</th>
-              <th scope="col">Kejadian</th>
-              <th scope="col">Tingkat</th>
+              <th scope="col">Time</th>
+              <th scope="col">Segment</th>
+              <th scope="col">Source</th>
+              <th scope="col">Event</th>
+              <th scope="col">Severity</th>
             </tr>
           </thead>
           <tbody id="alerts-body"></tbody>
@@ -160,17 +160,17 @@
 
     <section class="panel" id="infrastruktur">
       <div class="panel-header">
-        <h2>Infrastruktur lab</h2>
-        <p>Status perangkat dicatat manual, belum dipantau otomatis.</p>
+        <h2>Lab Infrastructure</h2>
+        <p>Device status is recorded manually and is not monitored automatically yet.</p>
       </div>
 
       <div class="device-row">
         <div class="device-icon" aria-hidden="true">R</div>
         <div class="device-info">
           <strong>MikroTik CHR</strong>
-          <span><code>192.168.56.20</code>, sumber syslog</span>
+          <span><code>192.168.56.20</code>, syslog source</span>
         </div>
-        <span class="muted">Konektivitas sudah diuji</span>
+        <span class="muted">Connectivity tested</span>
       </div>
 
       <div class="device-row">
@@ -179,12 +179,12 @@
           <strong>Wazuh Server</strong>
           <span><code>192.168.56.10</code>, Ubuntu Server</span>
         </div>
-        <span class="muted">Status perlu verifikasi langsung</span>
+        <span class="muted">Status requires direct verification</span>
       </div>
     </section>
 
     <footer>
-      GarudaShield — Deteksi dini ancaman jaringan IT/OT
+      GarudaShield — Early detection of IT/OT network threats
     </footer>
   </main>
 
@@ -199,7 +199,7 @@
     inert
   >
     <button class="btn drawer-close" id="detail-close" type="button">
-      Tutup
+      Close
     </button>
 
     <div id="detail-badges" class="badges"></div>
@@ -207,12 +207,12 @@
     <dl id="detail-facts" class="facts"></dl>
 
     <section id="detail-explanation" hidden>
-      <h3>Penjelasan</h3>
+      <h3>Explanation</h3>
       <p id="detail-text"></p>
     </section>
 
     <section>
-      <h3>Langkah awal yang disarankan</h3>
+      <h3>Recommended Initial Actions</h3>
       <ol id="detail-steps"></ol>
       <p class="muted" id="detail-note"></p>
     </section>
